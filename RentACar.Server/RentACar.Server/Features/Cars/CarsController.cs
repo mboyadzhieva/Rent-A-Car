@@ -2,12 +2,34 @@
 
 namespace RentACar.Server.Features.Cars
 {
-    public class CarsController : Controller
+    public class CarsController : ApiController
     {
+        /*
+         * GetAll GetByBrand GetByModel GetByPricePerDay GetByNumOfSeats GetByFuelType
+         */
+
         [HttpGet]
-        public IActionResult Index()
+        public void GetAll()
         {
-            return View();
+
+        }
+
+        [HttpPost]
+        public void CreateCar()
+        {
+
+        }
+
+        [HttpPut]
+        public void UpdateCar()
+        {
+
+        }
+
+        [HttpDelete]
+        public void DeleteCar()
+        {
+
         }
     }
 }
