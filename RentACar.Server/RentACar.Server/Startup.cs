@@ -6,6 +6,7 @@ namespace RentACar.Server
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using RentACar.Server.Infrastructure.Extensions;
 
     public class Startup
     {
@@ -25,6 +26,7 @@ namespace RentACar.Server
                 .AddJwtAuthentication(services.GetAppSettings(this.Configuration))
                 .AddApplicationServices()
                 .AddSwagger()
+                .AddAutoMapper()
                 .AddControllers();
         }
 
