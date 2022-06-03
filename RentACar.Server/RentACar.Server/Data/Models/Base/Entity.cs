@@ -1,15 +1,9 @@
-﻿namespace RentACar.Server.Data.Models
+﻿namespace RentACar.Server.Data.Models.Base
 {
-    using Microsoft.AspNetCore.Identity;
-    using Data.Models.Base;
     using System;
 
-    public class User : IdentityUser, IEntity
+    public abstract class Entity : IEntity
     {
-        public string FullName { get; set; }
-
-        public string PictureUrl { get; set; }
-
         public DateTime CreatedOn { get; set; }
 
         public string CreatedBy { get; set; }
