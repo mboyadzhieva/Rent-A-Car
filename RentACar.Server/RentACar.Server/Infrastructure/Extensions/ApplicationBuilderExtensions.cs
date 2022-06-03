@@ -1,4 +1,4 @@
-﻿namespace RentACar.Server.Infrastructure
+﻿namespace RentACar.Server.Infrastructure.Extensions
 {
     using Data;
     using Microsoft.AspNetCore.Builder;

@@ -1,5 +1,6 @@
-﻿namespace RentACar.Server.Infrastructure
+﻿namespace RentACar.Server.Infrastructure.Extensions
 {
+    using AutoMapper;
     using Data;
     using Data.Models;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -9,8 +10,11 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
-    using RentACar.Server.Features.Identity;
+    using Features.Cars;
+    using Features.Identity;
+    using Features.Users;
     using System.Text;
+    using RentACar.Server.Infrastructure.Services;
 
     public static class ServiceCollectionExtension
     {
@@ -77,7 +81,13 @@
         public static IServiceCollection AddApplicationServices(
             this IServiceCollection services)
         {
-            return services.AddTransient<IIdentityService, IdentityService>();
+            services
+               .AddTransient<IIdentityService, IdentityService>()
+               .AddTransient<ICurrentUserService, CurrentUserService>()
+               .AddTransient<ICarService, CarService>()
+               .AddTransient<IUserService, UserService>();
+
+            return services;
         }
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
@@ -90,6 +100,19 @@
                         Version = "v1"
                     });
             });
+
+        public static IServiceCollection AddAutoMapper(this IServiceCollection sevices)
+        {
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            sevices.AddSingleton(mapper);
+
+            return sevices;
+        }
 
     }
 }
