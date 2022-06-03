@@ -5,12 +5,14 @@
 
     public interface ICarService
     {
-        List<CarRequestModel> GetAllCars();
+        Task<IEnumerable<CarModel>> GetAll();
 
-        Task<int> CreateCar(CarRequestModel model);
+        Task<CarModel> Get(int id);
 
-        bool UpdateCar(CarRequestModel model);
+        Task<int> Create(CarModel model);
 
-        bool DeleteCar(int carId);
+        Task<bool> Update(CarModel model);
+
+        Task<bool> Delete(int carId);
     }
 }

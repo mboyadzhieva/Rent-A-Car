@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RentACar.Server.Data;
 using RentACar.Server.Data.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RentACar.Server.Features.Cars
@@ -17,7 +19,23 @@ namespace RentACar.Server.Features.Cars
             this.dbContext = dbContext;
         }
 
-        public async Task<int> CreateCar(CarRequestModel model)
+        public async Task<IEnumerable<CarModel>> GetAll()
+        {
+            return await this.dbContext
+                .Cars
+                .Where(c => c.IsDeleted == false)
+                .Select(c => mapper.Map<CarModel>(c))
+                .ToListAsync();
+        }
+
+        public async Task<CarModel> Get(int id)
+        {
+            var user = await this.dbContext.Cars.FindAsync(id);
+
+            return mapper.Map<CarModel>(user);
+        }
+
+        public async Task<int> Create(CarModel model)
         {
             var car = mapper.Map<Car>(model);
 
@@ -27,19 +45,39 @@ namespace RentACar.Server.Features.Cars
             return car.Id;
         }
 
-        public bool DeleteCar(int carId)
+        public async Task<bool> Update(CarModel model)
         {
-            throw new System.NotImplementedException();
+            var car = await this.dbContext.Cars.FindAsync(model.Id);
+
+            if (car != null)
+            {
+                mapper.Map(model, car);
+                await this.dbContext.SaveChangesAsync();
+
+                return true;
+            }
+
+            return false;
         }
 
-        public List<CarRequestModel> GetAllCars()
+        public async Task<bool> Delete(int carId)
         {
-            throw new System.NotImplementedException();
-        }
+            var car = await this.dbContext
+                .Cars
+                .Where(x => x.Id == carId)
+                .FirstOrDefaultAsync();
 
-        public bool UpdateCar(CarRequestModel model)
-        {
-            throw new System.NotImplementedException();
+            if (car != null)
+            {
+                this.dbContext.Remove(car);
+                await this.dbContext.SaveChangesAsync();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

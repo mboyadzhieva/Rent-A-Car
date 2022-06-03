@@ -1,7 +1,9 @@
 ﻿namespace RentACar.Server.Features.Cars
 {
-    public class CarRequestModel
+    public class CarModel
     {
+        public int Id { get; set; }
+
         public string VehicleType { get; set; }
 
         public string Brand { get; set; }
