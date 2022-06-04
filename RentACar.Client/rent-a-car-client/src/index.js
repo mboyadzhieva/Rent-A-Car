@@ -4,6 +4,22 @@ import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import axios from "axios";
+import { getToken } from "./services/auth-service";
+
+axios.interceptors.request.use(
+  (request) => {
+    const token = getToken();
+    if (token) {
+      request.headers["Authorization"] = `Bearer ${token}`;
+    }
+    request.headers["Content-Type"] = "application/json";
+    return request;
+  },
+  (error) => {
+    console.log(error);
+  }
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
