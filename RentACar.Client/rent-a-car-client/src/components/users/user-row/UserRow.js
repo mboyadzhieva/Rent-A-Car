@@ -1,8 +1,8 @@
-import "./UserLayout.scss";
 import Nav from "react-bootstrap/Nav";
 import { useNavigate } from "react-router-dom";
+import "./UserRow.scss";
 
-export function UserLayout({ user, onUserDelete }) {
+export function UserRow({ user, onUserDelete }) {
   const navigate = useNavigate();
 
   const redirectToEdit = () => {
@@ -28,23 +28,7 @@ export function UserLayout({ user, onUserDelete }) {
         >
           Delete
         </Nav.Link>
-        {/* <Button variant="danger" type="submit" onClick={onUserDelete}>
-          Delete
-        </Button> */}
       </td>
     </tr>
-    // <section className="user-info-wrapper">
-    //   <h2>{user.fullName}</h2>
-    //   <img
-    //     className="profile-photo"
-    //     src={user.pictureUrl}
-    //     alt="Profile picture."
-    //   />
-    //   <ul>
-    //     <li>{user.username}</li>
-    //     <li>{user.email}</li>
-    //     <li>{user.phoneNumber}</li>
-    //   </ul>
-    // </section>
   );
 }

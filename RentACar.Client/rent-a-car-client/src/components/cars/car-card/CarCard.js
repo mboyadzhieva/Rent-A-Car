@@ -1,9 +1,9 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import "./CarCard.scss";
 import { useNavigate } from "react-router-dom";
+import "./CarCard.scss";
 
-export function CarCard({ car, onCarDelete, isInCarRentalDetails }) {
+export function CarCard({ car, onCarDelete }) {
   const navigate = useNavigate();
 
   const navigateToEdit = () => {
@@ -39,41 +39,29 @@ export function CarCard({ car, onCarDelete, isInCarRentalDetails }) {
         <Card.Text>
           <strong>Price per day: </strong>${car.pricePerDay}
         </Card.Text>
-        {!isInCarRentalDetails ? (
-          <Button
-            className="car-action-btn"
-            variant="primary"
-            onClick={navigateToCarRental}
-          >
-            Rent
-          </Button>
-        ) : (
-          ""
-        )}
+        <Button
+          className="car-action-btn"
+          variant="primary"
+          onClick={navigateToCarRental}
+          disabled={car.count <= 0}
+        >
+          Rent
+        </Button>
 
-        {!isInCarRentalDetails ? (
-          <Button
-            className="car-action-btn"
-            variant="warning"
-            onClick={navigateToEdit}
-          >
-            Edit
-          </Button>
-        ) : (
-          ""
-        )}
-
-        {!isInCarRentalDetails ? (
-          <Button
-            className="car-action-btn"
-            variant="danger"
-            onClick={() => onCarDelete(car.id)}
-          >
-            Delete
-          </Button>
-        ) : (
-          ""
-        )}
+        <Button
+          className="car-action-btn"
+          variant="warning"
+          onClick={navigateToEdit}
+        >
+          Edit
+        </Button>
+        <Button
+          className="car-action-btn"
+          variant="danger"
+          onClick={() => onCarDelete(car.id)}
+        >
+          Delete
+        </Button>
       </Card.Body>
     </Card>
   );

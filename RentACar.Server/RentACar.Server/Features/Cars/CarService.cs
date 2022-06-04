@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using RentACar.Server.Data;
-using RentACar.Server.Data.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace RentACar.Server.Features.Cars
+﻿namespace RentACar.Server.Features.Cars
 {
+    using AutoMapper;
+    using Data;
+    using Data.Models;
+    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class CarService : ICarService
     {
         private readonly IMapper mapper;

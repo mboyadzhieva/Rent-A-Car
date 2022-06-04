@@ -9,7 +9,7 @@ export async function login(user) {
 }
 
 export async function register(user) {
-  user.pictureUrl = `https://picsum.photos/200/200?random=${Math.random()}`;
+  user.pictureUrl = `https://picsum.photos/150/150?random=${Math.random()}`;
 
   return await axios.post(`${apiUrl}/register`, user);
 }

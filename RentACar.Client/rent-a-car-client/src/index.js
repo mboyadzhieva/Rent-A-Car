@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.scss";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+import App from "./App";
 import axios from "axios";
+import { BrowserRouter } from "react-router-dom";
 import { getToken } from "./services/auth-service";
+import "./index.scss";
 
 axios.interceptors.request.use(
   (request) => {
@@ -16,9 +16,7 @@ axios.interceptors.request.use(
     request.headers["Content-Type"] = "application/json";
     return request;
   },
-  (error) => {
-    console.log(error);
-  }
+  (error) => console.log(error)
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -1,26 +1,21 @@
 .header {
-  // position: fixed;
-  // top: 0px;
-  // height: 30px;
-  // width: 100%;
-  //margin-bottom: 10px;
   text-align: center;
 }
 
 .nav-link {
-  color: #b7bbbf;
+  color: #b7bbbf !important;
 }
 
 .nav-link:hover {
-  color: coral;
+  color: coral !important;
 }
 
 .logout {
-  background-color: rgb(33, 37, 41);
-  border-color: rgb(33, 37, 41);
+  background-color: rgb(33, 37, 41) !important;
+  border-color: rgb(33, 37, 41) !important;
 }
 
 .logout:hover {
-  background-color: rgb(33, 37, 41);
-  border-color: rgb(33, 37, 41);
+  background-color: rgb(33, 37, 41) !important;
+  border-color: rgb(33, 37, 41) !important;
 }

@@ -10,21 +10,23 @@ export function EditUser() {
 
   const params = useParams();
 
-  useEffect(() => {
-    if (params.id) {
-      getUserById(params.id).then((response) => {
-        setUser(response.data);
-      });
-    }
-  }, [params.id]);
-
   const [user, setUser] = useState({
     fullName: "",
-    username: "",
+    userName: "",
     email: "",
     phoneNumber: "",
     pictureUrl: "",
   });
+
+  useEffect(() => {
+    if (params.id) {
+      getUserById(params.id)
+        .then((response) => {
+          setUser(response.data);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [params.id]);
 
   const onUserEdit = () => {
     updateUser(user).then(() => {
@@ -61,7 +63,7 @@ export function EditUser() {
           <Form.Control
             type="text"
             placeholder="Enter username"
-            name="username"
+            name="userName"
             value={user.userName}
             onChange={onInputChange}
           />
@@ -94,7 +96,7 @@ export function EditUser() {
           <Form.Control
             type="text"
             placeholder="Enter picture url"
-            name="puctureUrl"
+            name="pictureUrl"
             value={user.pictureUrl}
             onChange={onInputChange}
           />

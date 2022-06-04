@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace RentACar.Server.Features.CaRental
+﻿namespace RentACar.Server.Features.CaRental
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface ICarRentalService
     {
         Task<IEnumerable<CarRentalDetailsResponseModel>> GetByUserId(string id);

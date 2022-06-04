@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace RentACar.Server.Features.CaRental
+﻿namespace RentACar.Server.Features.CaRental
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     [Authorize]
     public class CarRentalController : ApiController
     {
@@ -28,14 +27,5 @@ namespace RentACar.Server.Features.CaRental
         {
             return await this.carRental.Rent(model);
         }
-
-        //[HttpGet]
-        //[Route("{id}")]
-        //public async Task<CarRentalDetailsResponseModel> Get(int id)
-        //{
-        //    return await this.carRental.Get(id);
-        //}
-
-
     }
 }

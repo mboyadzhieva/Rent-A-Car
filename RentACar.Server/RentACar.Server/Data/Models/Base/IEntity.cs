@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace RentACar.Server.Data.Models.Base
+﻿namespace RentACar.Server.Data.Models.Base
 {
+    using System;
+
     public interface IEntity
     {
         DateTime CreatedOn { get; set; }

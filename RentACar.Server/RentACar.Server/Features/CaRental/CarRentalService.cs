@@ -1,16 +1,15 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using RentACar.Server.Data;
-using RentACar.Server.Data.Models;
-using RentACar.Server.Features.Cars;
-using RentACar.Server.Infrastructure.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace RentACar.Server.Features.CaRental
+﻿namespace RentACar.Server.Features.CaRental
 {
+    using AutoMapper;
+    using Data;
+    using Data.Models;
+    using Infrastructure.Services;
+    using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class CarRentalService : ICarRentalService
     {
         private readonly RentACarDbContext dbContext;
@@ -51,6 +50,10 @@ namespace RentACar.Server.Features.CaRental
             await this.dbContext.SaveChangesAsync();
 
             var createdCarRental = mapper.Map<CarRentalDetailsResponseModel>(carRental);
+
+            createdCarRental.ConstructionYear = carToBeRented.ConstructionYear;
+            createdCarRental.Brand = carToBeRented.Brand;
+            createdCarRental.Model = carToBeRented.Model;
 
             return createdCarRental;
 

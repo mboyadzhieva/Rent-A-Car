@@ -2,9 +2,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { editCar, getCarById, saveCar } from "./../../../services/car-service";
-import "./CarForm.scss";
+import { getCarById, saveCar } from "./../../../services/car-service";
 import { Col } from "react-bootstrap";
+import "./CarForm.scss";
 
 export function CarForm() {
   const navigate = useNavigate();
@@ -24,9 +24,11 @@ export function CarForm() {
 
   useEffect(() => {
     if (params.id) {
-      getCarById(params.id).then((response) => {
-        setCar(response.data);
-      });
+      getCarById(params.id)
+        .then((response) => {
+          setCar(response.data);
+        })
+        .catch((error) => console.log(error));
     }
   }, [params.id]);
 
@@ -48,6 +50,9 @@ export function CarForm() {
   return (
     <Col className="car-form-wrapper">
       <Form className="car-form" onSubmit={onCarSubmit}>
+        <h1 className="form-title">
+          {car.id ? "Edit Car Info" : "Create Car"}
+        </h1>
         <Form.Group className="mb-3">
           <Form.Label>Brand</Form.Label>
           <Form.Control
@@ -155,7 +160,7 @@ export function CarForm() {
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          {car.id ? "Edit Car" : "Create Car"}
+          {car.id ? "Save changes" : "Create Car"}
         </Button>
       </Form>
     </Col>

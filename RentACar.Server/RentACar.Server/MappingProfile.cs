@@ -2,10 +2,10 @@
 {
     using AutoMapper;
     using Data.Models;
+    using Features.CaRental;
     using Features.Cars;
     using Features.Users;
     using Models.Identity;
-    using RentACar.Server.Features.CaRental;
 
     public class MappingProfile : Profile
     {

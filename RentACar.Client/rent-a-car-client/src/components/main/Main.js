@@ -1,14 +1,13 @@
-import { useRoutes } from "react-router-dom";
 import NonAuthGuard from "./../../services/non-auth-guard-service";
-import { Register } from "./../auth/register/Register";
-import { Login } from "./../auth/login/Login";
 import AuthGuard from "./../../services/auth-guard-service";
-import { UsersList } from "./../users/user-table/UsersList";
+import { useRoutes } from "react-router-dom";
+import { UsersTable } from "../users/users-table/UsersTable";
 import { EditUser } from "./../users/user-edit-form/EditUser";
 import { CarList } from "../cars/car-list/CarList";
 import { CarForm } from "./../cars/car-form/CarForm";
-import { RentACarForm } from "./../car-rental/rent-a-car-form/RentACarForm";
-import { CarRentalDetails } from "../car-rental/user-car-rentals/CarRentalsDetails";
+import { RentACarForm } from "../car-rental/RentACarForm";
+import { Login } from "./../auth/Login";
+import { Register } from "../auth/Register";
 
 export function Main() {
   const CustomRoutes = () =>
@@ -33,7 +32,7 @@ export function Main() {
         path: "/",
         element: (
           <AuthGuard>
-            <UsersList />
+            <UsersTable />
           </AuthGuard>
         ),
       },
@@ -41,7 +40,7 @@ export function Main() {
         path: "/users",
         element: (
           <AuthGuard>
-            <UsersList />
+            <UsersTable />
           </AuthGuard>
         ),
       },
@@ -82,14 +81,6 @@ export function Main() {
         element: (
           <AuthGuard>
             <RentACarForm />
-          </AuthGuard>
-        ),
-      },
-      {
-        path: "/car-rentals/:id",
-        element: (
-          <AuthGuard>
-            <CarRentalDetails />
           </AuthGuard>
         ),
       },

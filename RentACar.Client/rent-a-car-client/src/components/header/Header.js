@@ -1,13 +1,12 @@
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-
-import "./Header.scss";
-import { getToken, isUserLogged, logout } from "./../../services/auth-service";
+import { isUserLogged, logout } from "./../../services/auth-service";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import "./Header.scss";
 
 export function Header() {
   const navigate = useNavigate();

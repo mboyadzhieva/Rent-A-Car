@@ -1,8 +1,7 @@
-﻿using RentACar.Server.Data.Models;
-using System;
-
-namespace RentACar.Server.Features.CaRental
+﻿namespace RentACar.Server.Features.CaRental
 {
+    using System;
+
     public class CreateCarRentalRequestModel
     {
         public int CarId { get; set; }

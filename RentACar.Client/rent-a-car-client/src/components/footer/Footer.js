@@ -1,6 +1,6 @@
-import "./Footer.scss";
 import Col from "react-bootstrap/Col";
+import "./Footer.scss";
 
 export function Footer() {
-  return <Col className="footer">Footer</Col>;
+  return <Col className="footer">&copy; 2022</Col>;
 }

@@ -1,10 +1,10 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import "./../Auth.scss";
 import { useState } from "react";
-import { register } from "../../../services/auth-service";
+import { register } from "../../services/auth-service";
 import { useNavigate } from "react-router-dom";
+import "./Auth.scss";
 
 export function Register() {
   const navigate = useNavigate();
@@ -29,9 +29,11 @@ export function Register() {
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    register(user).then(() => {
-      navigate("/login");
-    });
+    register(user)
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -94,14 +96,9 @@ export function Register() {
         </Form.Group>
 
         <Button variant="primary" type="submit" onClick={onFormSubmit}>
-          Submit
+          Register
         </Button>
       </Form>
     </Col>
-    // <div className="bg">
-    //   <div className="form-wrapper shadow-lg p-3 mb-5 bg-white rounded">
-
-    //   </div>
-    // </div>
   );
 }

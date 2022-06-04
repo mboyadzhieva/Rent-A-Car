@@ -3,6 +3,9 @@
     using AutoMapper;
     using Data;
     using Data.Models;
+    using Features.Cars;
+    using Features.Identity;
+    using Features.Users;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -10,12 +13,9 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
-    using Features.Cars;
-    using Features.Identity;
-    using Features.Users;
-    using System.Text;
-    using RentACar.Server.Infrastructure.Services;
     using RentACar.Server.Features.CaRental;
+    using RentACar.Server.Infrastructure.Services;
+    using System.Text;
 
     public static class ServiceCollectionExtension
     {

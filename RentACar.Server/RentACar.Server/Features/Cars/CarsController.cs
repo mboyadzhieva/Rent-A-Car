@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace RentACar.Server.Features.Cars
+﻿namespace RentACar.Server.Features.Cars
 {
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     [Authorize]
     public class CarsController : ApiController
     {
         private readonly ICarService cars;
-        /*
-         * GetAll GetByBrand GetByModel GetByPricePerDay GetByNumOfSeats GetByFuelType
-         */
 
         public CarsController(ICarService cars)
         {

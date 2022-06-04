@@ -1,9 +1,9 @@
-﻿using RentACar.Server.Data.Models.Base;
-using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace RentACar.Server.Data.Models
+﻿namespace RentACar.Server.Data.Models
 {
+    using RentACar.Server.Data.Models.Base;
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class CarRental : Entity
     {
         public int Id { get; set; }

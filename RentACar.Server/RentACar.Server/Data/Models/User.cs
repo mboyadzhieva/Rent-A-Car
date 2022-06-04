@@ -1,9 +1,8 @@
 ﻿namespace RentACar.Server.Data.Models
 {
     using Microsoft.AspNetCore.Identity;
-    using Data.Models.Base;
+    using Base;
     using System;
-    using System.Collections.Generic;
 
     public class User : IdentityUser, IEntity
     {

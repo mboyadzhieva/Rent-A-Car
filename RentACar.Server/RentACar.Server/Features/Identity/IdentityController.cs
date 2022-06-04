@@ -2,7 +2,6 @@
 {
     using AutoMapper;
     using Data.Models;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Options;
@@ -28,15 +27,8 @@
             this.mapper = mapper;
         }
 
-        /// <summary>
-        /// Summary 
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
         [HttpPost]
         [Route(nameof(Register))]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Register(RegisterRequestModel model)
         {
             var user = mapper.Map<User>(model);

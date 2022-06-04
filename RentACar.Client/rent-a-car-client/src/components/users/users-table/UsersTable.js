@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { deleteUser, getAllUsers } from "../../../services/users-service";
-import { UserLayout } from "../user-table-row/UserLayout";
-import "./UsersList.scss";
+import { UserRow } from "../user-row/UserRow";
 import Table from "react-bootstrap/Table";
+import "./UsersTable.scss";
 
-export function UsersList() {
+export function UsersTable() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -12,16 +12,16 @@ export function UsersList() {
       .then((response) => {
         setUsers(response.data);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => console.log(error));
   }, []);
 
   const deleteUserHandler = async (id) => {
     deleteUser(id).then(() => {
-      getAllUsers().then((response) => {
-        setUsers(response.data);
-      });
+      getAllUsers()
+        .then((response) => {
+          setUsers(response.data);
+        })
+        .catch((error) => console.log(error));
     });
   };
 
@@ -39,16 +39,9 @@ export function UsersList() {
       </thead>
       <tbody>
         {users.map((user) => (
-          <UserLayout
-            key={user.id}
-            user={user}
-            onUserDelete={deleteUserHandler}
-          />
+          <UserRow key={user.id} user={user} onUserDelete={deleteUserHandler} />
         ))}
       </tbody>
     </Table>
-    // <div>
-
-    // </div>
   );
 }

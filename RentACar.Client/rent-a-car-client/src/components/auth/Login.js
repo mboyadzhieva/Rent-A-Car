@@ -1,10 +1,10 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import "./../Auth.scss";
-import { login, saveToken } from "./../../../services/auth-service";
+import { login } from "../../services/auth-service";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Auth.scss";
 
 export function Login() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export function Login() {
 
     login(user)
       .then(() => {
-        navigate("/users");
+        navigate("/cars");
       })
       .catch((error) => setError(error.message));
   };

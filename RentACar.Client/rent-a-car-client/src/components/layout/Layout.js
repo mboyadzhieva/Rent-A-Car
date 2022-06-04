@@ -1,7 +1,6 @@
 import { Header } from "./../header/Header";
 import { Footer } from "./../footer/Footer";
 import { Main } from "./../main/Main";
-import "./Layout.scss";
 import { Container, Row } from "react-bootstrap";
 
 export function Layout() {
