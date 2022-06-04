@@ -1,5 +1,6 @@
 ﻿namespace RentACar.Server.Features.Identity
 {
+    using AutoMapper;
     using Data.Models;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
@@ -13,12 +14,18 @@
         private readonly UserManager<User> userManager;
         private readonly IIdentityService identityService;
         private readonly AppSettings appSettings;
+        private readonly IMapper mapper;
 
-        public IdentityController(UserManager<User> userManager, IOptions<AppSettings> appSettings, IIdentityService identityService)
+        public IdentityController(
+            UserManager<User> userManager, 
+            IOptions<AppSettings> appSettings, 
+            IIdentityService identityService, 
+            IMapper mapper)
         {
             this.userManager = userManager;
             this.identityService = identityService;
             this.appSettings = appSettings.Value;
+            this.mapper = mapper;
         }
 
         /// <summary>
@@ -32,13 +39,7 @@
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult> Register(RegisterRequestModel model)
         {
-            var user = new User
-            {
-                UserName = model.Username,
-                PhoneNumber = model.Phone,
-                Email = model.Email,
-                FullName = model.FullName
-            };
+            var user = mapper.Map<User>(model);
 
             var result = await userManager.CreateAsync(user, model.Password);
 
@@ -70,6 +71,7 @@
 
             var encryptedToken = identityService.GenerateJwtToken(
                 user.Id, 
+                user.UserName,
                 user.Email, 
                 this.appSettings.Secret);
 

@@ -8,7 +8,7 @@
 
     public class IdentityService : IIdentityService
     {
-        public string GenerateJwtToken(string userId, string email, string secret)
+        public string GenerateJwtToken(string userId, string userName, string email, string secret)
         {
             // generate token that is valid for 7 days
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -19,7 +19,8 @@
                 Subject = new ClaimsIdentity(new[] 
                 { 
                     new Claim(ClaimTypes.NameIdentifier, userId),
-                    new Claim(ClaimTypes.Email, email)
+                    new Claim(ClaimTypes.Email, email),
+                    new Claim(ClaimTypes.Name, userName)
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
