@@ -1,9 +1,9 @@
 .header {
-  background-color: coral;
   // position: fixed;
   // top: 0px;
   // height: 30px;
   // width: 100%;
+  //margin-bottom: 10px;
   text-align: center;
 }
 
@@ -13,4 +13,14 @@
 
 .nav-link:hover {
   color: coral;
+}
+
+.logout {
+  background-color: rgb(33, 37, 41);
+  border-color: rgb(33, 37, 41);
+}
+
+.logout:hover {
+  background-color: rgb(33, 37, 41);
+  border-color: rgb(33, 37, 41);
 }
