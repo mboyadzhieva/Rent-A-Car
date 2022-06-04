@@ -15,6 +15,7 @@
     using Features.Users;
     using System.Text;
     using RentACar.Server.Infrastructure.Services;
+    using RentACar.Server.Features.CaRental;
 
     public static class ServiceCollectionExtension
     {
@@ -85,7 +86,8 @@
                .AddTransient<IIdentityService, IdentityService>()
                .AddTransient<ICurrentUserService, CurrentUserService>()
                .AddTransient<ICarService, CarService>()
-               .AddTransient<IUserService, UserService>();
+               .AddTransient<IUserService, UserService>()
+               .AddTransient<ICarRentalService, CarRentalService>();
 
             return services;
         }
