@@ -14,13 +14,16 @@ export function Login() {
     password: "",
   });
 
+  const [error, setError] = useState("");
+
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    login(user).then((response) => {
-      saveToken(response.data["token"]);
-      navigate("/users");
-    });
+    login(user)
+      .then(() => {
+        navigate("/users");
+      })
+      .catch((error) => setError(error.message));
   };
 
   const onInputChange = (event) => {
@@ -36,7 +39,7 @@ export function Login() {
     <Col className="bg">
       <Form className="form-wrapper shadow-lg p-3 mb-5 bg-white rounded">
         <h1 className="form-title">Login</h1>
-
+        {error && <span className="text-danger">{error}</span>}
         <Form.Group className="mb-3">
           <Form.Label>Email address</Form.Label>
           <Form.Control
