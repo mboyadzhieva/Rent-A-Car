@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace RentACar.Server.Features.Cars
 {
+    [Authorize]
     public class CarsController : ApiController
     {
         private readonly ICarService cars;

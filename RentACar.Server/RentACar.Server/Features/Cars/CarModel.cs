@@ -18,7 +18,7 @@
 
         public string PictureUrl { get; set; }
 
-        public double PricePerDay { get; set; }
+        public decimal PricePerDay { get; set; }
 
         public int Count { get; set; }
     }
