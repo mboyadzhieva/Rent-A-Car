@@ -22,6 +22,8 @@
 
         public DbSet<Car> Cars { get; set; }
 
+        public DbSet<CarRental> CarRentals { get; set; }
+
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
         {
             this.ApplyAuditIformation();
