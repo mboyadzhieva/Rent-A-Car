@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using Data.Models.Base;
     using System;
+    using System.Collections.Generic;
 
     public class User : IdentityUser, IEntity
     {
