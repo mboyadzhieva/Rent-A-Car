@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "https://localhost:5001/users";
+const apiUrl = "https://rentacarserver.azurewebsites.net/users";
 
 export async function getAllUsers() {
   const users = await axios.get(apiUrl);

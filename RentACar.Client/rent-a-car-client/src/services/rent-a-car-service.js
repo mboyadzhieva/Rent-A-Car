@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "https://localhost:5001/carRental";
+const apiUrl = "https://rentacarserver.azurewebsites.net/carRental";
 
 export async function rentACar(carRental) {
   return await axios.post(apiUrl, carRental);

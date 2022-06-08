@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "https://localhost:5001/identity";
+const apiUrl = "https://rentacarserver.azurewebsites.net/identity";
 
 export async function login(user) {
   return await axios.post(`${apiUrl}/login`, user).then((response) => {

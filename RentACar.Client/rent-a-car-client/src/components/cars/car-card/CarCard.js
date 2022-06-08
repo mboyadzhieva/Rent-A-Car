@@ -16,7 +16,12 @@ export function CarCard({ car, onCarDelete }) {
 
   return (
     <Card className="car-card" style={{ width: "18rem" }}>
-      <Card.Img variant="top" src={car.pictureUrl} />
+      <Card.Img
+        variant="top"
+        className="card-img"
+        src={car.pictureUrl}
+        alt="Missing image"
+      />
       <Card.Body>
         <Card.Title>
           {car.constructionYear} {car.brand} {car.model}

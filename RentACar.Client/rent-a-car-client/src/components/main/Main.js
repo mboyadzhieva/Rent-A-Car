@@ -32,7 +32,7 @@ export function Main() {
         path: "/",
         element: (
           <AuthGuard>
-            <UsersTable />
+            <CarList />
           </AuthGuard>
         ),
       },
