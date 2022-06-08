@@ -7,5 +7,5 @@ RentACar.Server was deployed at https://rentacarserver.azurewebsites.net/
   2. Then run `npm start` to start the application
   3. When the login screen loads, you can either:
        * Login with credentials: 
-           **email: johnSmith@test.com & password: john** or
+           * **email: johnSmith@test.com & password: john** or
        * Create your own user via the register button at the top right 
