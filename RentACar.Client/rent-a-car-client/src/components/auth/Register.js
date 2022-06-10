@@ -48,6 +48,7 @@ export function Register() {
             name="fullName"
             value={user.fullName}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
@@ -59,6 +60,7 @@ export function Register() {
             name="username"
             value={user.username}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
@@ -70,6 +72,7 @@ export function Register() {
             name="email"
             value={user.email}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
@@ -81,6 +84,7 @@ export function Register() {
             name="phoneNumber"
             value={user.phoneNumber}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
@@ -92,6 +96,7 @@ export function Register() {
             name="password"
             value={user.password}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 

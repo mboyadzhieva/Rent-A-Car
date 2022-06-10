@@ -64,6 +64,7 @@ export function CarForm() {
             name="brand"
             value={car.brand}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
@@ -75,6 +76,7 @@ export function CarForm() {
             name="model"
             value={car.model}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
@@ -86,6 +88,7 @@ export function CarForm() {
             name="constructionYear"
             value={car.constructionYear}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
@@ -126,6 +129,7 @@ export function CarForm() {
             name="numberOfSeats"
             value={car.numberOfSeats}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
@@ -144,10 +148,11 @@ export function CarForm() {
           <Form.Label>Price</Form.Label>
           <Form.Control
             type="number"
-            placeholder="Enter price"
+            placeholder="Enter price per fay"
             name="pricePerDay"
             value={car.pricePerDay}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
@@ -159,6 +164,7 @@ export function CarForm() {
             name="count"
             value={car.count}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
