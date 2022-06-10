@@ -48,9 +48,12 @@ export function CarForm() {
   };
 
   return (
-    <Col className="car-form-wrapper">
-      <Form className="car-form" onSubmit={onCarSubmit}>
-        <h1 className="form-title">
+    <Col className="bg">
+      <Form
+        className="car-form-wrapper shadow-lg p-3 mb-5 bg-white rounded"
+        onSubmit={onCarSubmit}
+      >
+        <h1 className="car-form-title">
           {car.id ? "Edit Car Info" : "Create Car"}
         </h1>
         <Form.Group className="mb-3">

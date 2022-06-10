@@ -51,8 +51,11 @@ export function RentACarForm() {
   };
 
   return (
-    <Col className="rent-a-car-form-wrapper">
-      <Form className="rent-a-car-form">
+    <Col>
+      <Form className="rent-a-car-form shadow-lg p-3 mb-5 bg-white rounded">
+        <h3 className="rent-a-car-form-title">
+          Choose start and end dates of yor rental:
+        </h3>
         <Form.Group className="mb-3">
           <Form.Label>Start date</Form.Label>
           <Form.Control
@@ -61,6 +64,7 @@ export function RentACarForm() {
             name="startDate"
             value={carRentalRequestInfo.startDate}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
@@ -72,6 +76,7 @@ export function RentACarForm() {
             name="endDate"
             value={carRentalRequestInfo.endDate}
             onChange={onInputChange}
+            required
           />
         </Form.Group>
 
