@@ -18,10 +18,9 @@ export function CarRentalDetails({ carRental }) {
         {carRental.constructionYear} {carRental.brand} {carRental.model}
       </Accordion.Header>
       <Accordion.Body>
-        Rented for {carRental.days} days for total of ${carRental.totalPrice}{" "}
-        {""}
-        from {formatDate(carRental.startDate)} to
-        {formatDate(carRental.endDate)}.
+        Rented for {carRental.days} days {""}
+        from {formatDate(carRental.startDate)} to {""}
+        {formatDate(carRental.endDate)} for total of ${carRental.totalPrice}.
       </Accordion.Body>
     </Accordion.Item>
   );
