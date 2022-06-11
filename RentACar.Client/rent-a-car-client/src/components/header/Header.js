@@ -13,21 +13,20 @@ export function Header() {
   const [isAuthenticated, setAuthenticated] = useState();
 
   useEffect(() => {
-    setInterval(() => {
-      if (isUserLogged()) {
-        setAuthenticated(true);
-      }
-    }, []);
-  }, 5000);
+    if (isUserLogged()) {
+      setAuthenticated(true);
+    }
+  }, [isAuthenticated]);
 
   const showAppropriateLinks = () => {
-    if (isUserLogged()) {
+    if (isAuthenticated) {
       return (
         <>
           <Button
             className="nav-link logout"
             onClick={() => {
               logout();
+              setAuthenticated(false);
               navigate("/login");
             }}
           >
@@ -57,7 +56,7 @@ export function Header() {
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/users">Users</Nav.Link>
           <Nav.Link href="/cars">Cars</Nav.Link>
-          <Nav.Link href="/car/add">Add Car</Nav.Link>
+          <Nav.Link href="/car/add">Add car</Nav.Link>
           <Nav.Link href="/car-rentals">My rentals</Nav.Link>
         </Nav>
         {showAppropriateLinks()}
