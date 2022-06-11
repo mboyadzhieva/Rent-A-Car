@@ -60,7 +60,7 @@ export function RentACarForm() {
     <Col>
       <Form className="rent-a-car-form shadow-lg p-3 mb-5 bg-white rounded">
         <h3 className="rent-a-car-form-title">
-          Choose start and end dates of yor rental:
+          Choose start and end dates of your rental:
         </h3>
         {error && <span className="text-danger">{error}</span>}
         <Form.Group className="mb-3">
