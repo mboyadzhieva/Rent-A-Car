@@ -13,10 +13,12 @@ export function Header() {
   const [isAuthenticated, setAuthenticated] = useState();
 
   useEffect(() => {
-    if (isUserLogged()) {
-      setAuthenticated(true);
-    }
-  }, [isAuthenticated]);
+    setInterval(() => {
+      if (isUserLogged()) {
+        setAuthenticated(true);
+      }
+    }, []);
+  }, 5000);
 
   const showAppropriateLinks = () => {
     if (isAuthenticated) {
