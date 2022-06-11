@@ -45,6 +45,8 @@
 
             if (user != null)
             {
+                user.NormalizedEmail = model.Email.ToUpper();
+                user.NormalizedUserName = model.UserName.ToUpper();
                 mapper.Map(model, user);
                 await this.dbContext.SaveChangesAsync();
 
