@@ -23,6 +23,9 @@
             CreateMap<CarRental, CreateCarRentalRequestModel>();
             CreateMap<CreateCarRentalRequestModel, CarRental>();
 
+            CreateMap<CarRental, CreatedCarRentalResponseModel>();
+            CreateMap<CreatedCarRentalResponseModel, CarRental>();
+
             CreateMap<CarRental, CarRentalDetailsResponseModel>();
             CreateMap<CarRentalDetailsResponseModel, CarRental>();
         }

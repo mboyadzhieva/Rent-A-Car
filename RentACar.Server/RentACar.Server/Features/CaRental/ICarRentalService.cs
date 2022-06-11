@@ -5,10 +5,10 @@
 
     public interface ICarRentalService
     {
-        Task<IEnumerable<CarRentalDetailsResponseModel>> GetByUserId(string id);
+        Task<IEnumerable<CarRentalDetailsResponseModel>> Get();
 
-        Task<CarRentalDetailsResponseModel> Rent(CreateCarRentalRequestModel model);
+        Task<CreatedCarRentalResponseModel> Rent(CreateCarRentalRequestModel model);
 
-        Task<CarRentalDetailsResponseModel> Get(int id);
+        //Task<CarRentalDetailsResponseModel> Get(int id);
     }
 }

@@ -5,9 +5,10 @@ import { UsersTable } from "../users/users-table/UsersTable";
 import { EditUser } from "./../users/user-edit-form/EditUser";
 import { CarList } from "../cars/car-list/CarList";
 import { CarForm } from "./../cars/car-form/CarForm";
-import { RentACarForm } from "../car-rental/RentACarForm";
+import { RentACarForm } from "../car-rental/car-rental-form/RentACarForm";
 import { Login } from "./../auth/Login";
 import { Register } from "../auth/Register";
+import { CarRentalList } from "./../car-rental/car-rental-list/CarRentalList";
 
 export function Main() {
   const CustomRoutes = () =>
@@ -81,6 +82,14 @@ export function Main() {
         element: (
           <AuthGuard>
             <RentACarForm />
+          </AuthGuard>
+        ),
+      },
+      {
+        path: "/car-rentals",
+        element: (
+          <AuthGuard>
+            <CarRentalList />
           </AuthGuard>
         ),
       },

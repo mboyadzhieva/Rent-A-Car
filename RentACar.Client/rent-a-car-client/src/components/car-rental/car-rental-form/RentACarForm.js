@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 import { useParams, useNavigate } from "react-router-dom";
-import { rentACar } from "../../services/rent-a-car-service";
+import { rentACar } from "../../../services/rent-a-car-service";
 import { useState } from "react";
 import "./RentACarForm.scss";
 
@@ -11,6 +11,7 @@ export function RentACarForm() {
   const params = useParams();
   const navigate = useNavigate();
 
+  const [error, setError] = useState();
   const [show, setShow] = useState(false);
 
   const [carRentalRequestInfo, setCarRentalRequestInfo] = useState({
@@ -35,12 +36,17 @@ export function RentACarForm() {
         setCarRentalResponseInfo(response.data);
         setShow(true);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setError(error));
   };
 
-  const handleClose = () => {
+  const handleBackToCars = () => {
     setShow(false);
     navigate("/cars");
+  };
+
+  const handleBackToRentals = () => {
+    setShow(false);
+    navigate("/car-rentals");
   };
 
   const onInputChange = (event) => {
@@ -56,6 +62,7 @@ export function RentACarForm() {
         <h3 className="rent-a-car-form-title">
           Choose start and end dates of yor rental:
         </h3>
+        {error && <span className="text-danger">{error}</span>}
         <Form.Group className="mb-3">
           <Form.Label>Start date</Form.Label>
           <Form.Control
@@ -80,12 +87,22 @@ export function RentACarForm() {
           />
         </Form.Group>
 
-        <Button variant="primary" onClick={onRentACar}>
+        <Button
+          variant="primary"
+          onClick={onRentACar}
+          disabled={
+            carRentalRequestInfo.startDate === "" ||
+            carRentalRequestInfo.endDate === "" ||
+            carRentalRequestInfo.startDate >= carRentalRequestInfo.endDate
+              ? true
+              : false
+          }
+        >
           Rent
         </Button>
       </Form>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleBackToCars}>
         <Modal.Header closeButton>
           <Modal.Title>Rental Confirmation</Modal.Title>
         </Modal.Header>
@@ -99,8 +116,11 @@ export function RentACarForm() {
           the price of <strong>${carRentalResponseInfo.totalPrice}</strong>!
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleBackToCars}>
             Back to cars
+          </Button>
+          <Button variant="primary" onClick={handleBackToRentals}>
+            Back to rentals
           </Button>
         </Modal.Footer>
       </Modal>

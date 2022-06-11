@@ -58,6 +58,7 @@ export function Header() {
           <Nav.Link href="/users">Users</Nav.Link>
           <Nav.Link href="/cars">Cars</Nav.Link>
           <Nav.Link href="/car/add">Add Car</Nav.Link>
+          <Nav.Link href="/car-rentals">My rentals</Nav.Link>
         </Nav>
         {showAppropriateLinks()}
       </Container>

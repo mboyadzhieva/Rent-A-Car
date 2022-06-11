@@ -26,8 +26,15 @@
             this.mapper = mapper;
         }
 
-        public async Task<CarRentalDetailsResponseModel> Rent(CreateCarRentalRequestModel model)
+        public async Task<CreatedCarRentalResponseModel> Rent(CreateCarRentalRequestModel model)
         {
+            if (model.StartDate < DateTime.UtcNow
+                || model.EndDate < model.StartDate
+                || model.EndDate < DateTime.UtcNow)
+            {
+                return null;
+            }
+
             var userId = this.currentUser.GetUserId();
 
             var days = (model.EndDate - model.StartDate).Days;
@@ -49,33 +56,44 @@
             this.dbContext.Add(carRental);
             await this.dbContext.SaveChangesAsync();
 
-            var createdCarRental = mapper.Map<CarRentalDetailsResponseModel>(carRental);
+            var createdCarRental = mapper.Map<CreatedCarRentalResponseModel>(carRental);
 
             createdCarRental.ConstructionYear = carToBeRented.ConstructionYear;
             createdCarRental.Brand = carToBeRented.Brand;
             createdCarRental.Model = carToBeRented.Model;
 
             return createdCarRental;
-
         }
 
-        public async Task<IEnumerable<CarRentalDetailsResponseModel>> GetByUserId(string id)
+        public async Task<IEnumerable<CarRentalDetailsResponseModel>> Get()
         {
-            return await this.dbContext
-                .CarRentals
-                .Where(cr => cr.UserId == id)
-                .Select(cr => mapper.Map<CarRentalDetailsResponseModel>(cr))
-                .ToListAsync();
+            string userId = this.currentUser.GetUserId();
+
+            return await (from cr in dbContext.CarRentals
+                          from c in dbContext.Cars
+                         where cr.CarId == c.Id && cr.UserId == userId
+                        select new CarRentalDetailsResponseModel
+                        {
+                            Id = cr.Id,
+                            Brand = c.Brand,
+                            Model = c.Model,
+                            ConstructionYear = c.ConstructionYear,
+                            Days = cr.Days,
+                            TotalPrice = cr.TotalPrice,
+                            StartDate = cr.StartDate,
+                            EndDate = cr.EndDate
+                        })
+                        .ToListAsync();
         }
 
-        public async Task<CarRentalDetailsResponseModel> Get(int id)
-        {
-            return await this.dbContext
-                .CarRentals
-                .Where(cr => cr.Id == id)
-                .Select(cr => mapper.Map<CarRentalDetailsResponseModel>(cr))
-                .FirstOrDefaultAsync();
-        }
+        //public async Task<CarRentalDetailsResponseModel> Get(int id)
+        //{
+        //    return await this.dbContext
+        //        .CarRentals
+        //        .Where(cr => cr.Id == id)
+        //        .Select(cr => mapper.Map<CarRentalDetailsResponseModel>(cr))
+        //        .FirstOrDefaultAsync();
+        //}
 
         private decimal CalculateTotalPrice(string userId, int days, decimal pricePerDay)
         {
@@ -106,8 +124,8 @@
         {
             var userCarRentals = this.dbContext
                 .CarRentals
-                .Where(cr => 
-                    cr.UserId.Equals(userId) 
+                .Where(cr =>
+                    cr.UserId.Equals(userId)
                     && (cr.StartDate.AddDays(60) >= DateTime.Now))
                 .ToList();
 

@@ -5,6 +5,7 @@ import App from "./App";
 import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
 import { getToken } from "./services/auth-service";
+import { Notification } from "react-rainbow-components";
 import "./index.scss";
 
 axios.interceptors.request.use(
@@ -17,6 +18,18 @@ axios.interceptors.request.use(
     return request;
   },
   (error) => console.log(error)
+);
+
+axios.interceptors.response.use(
+  (request) => request,
+  (error) => {
+    //Promise.reject("something went wrong");
+    if (error.response.status === 400) {
+      throw new Error("Check the date you're trying to send and try again!");
+    } else if (error.response.status === 401) {
+      throw new Error("Check if you've entered the correct login data!");
+    }
+  }
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

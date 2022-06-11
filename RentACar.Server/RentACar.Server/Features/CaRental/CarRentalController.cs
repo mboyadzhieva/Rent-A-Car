@@ -16,14 +16,13 @@
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<IEnumerable<CarRentalDetailsResponseModel>> GetByUserId(string id)
+        public async Task<IEnumerable<CarRentalDetailsResponseModel>> Get()
         {
-            return await this.carRental.GetByUserId(id);
+            return await this.carRental.Get();
         }
 
         [HttpPost]
-        public async Task<CarRentalDetailsResponseModel> Create(CreateCarRentalRequestModel model)
+        public async Task<CreatedCarRentalResponseModel> Create(CreateCarRentalRequestModel model)
         {
             return await this.carRental.Rent(model);
         }
