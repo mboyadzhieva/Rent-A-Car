@@ -4,7 +4,6 @@ const apiUrl = "https://rentacarserver.azurewebsites.net/users";
 
 export async function getAllUsers() {
   const users = await axios.get(apiUrl);
-  console.log(users);
   return users;
 }
 
