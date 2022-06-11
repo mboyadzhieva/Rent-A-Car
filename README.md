@@ -11,4 +11,5 @@ RentACar.Server was deployed at https://rentacarserver.azurewebsites.net/
            * **email: johnSmith@test.com & password: john** or
        * Create your own user via the register button at the top right 
 
-### OR you can browse through the published version here, using the same email and password (**email: johnSmith@test.com & password: john**): [Rent A Car Client](https://62a4f6c30692a558d0aa0286--fancy-crisp-a8fa97.netlify.app/)
+OR you can browse through the published version here, using the same email and password (**email: johnSmith@test.com & password: john**): 
+[Rent A Car Client](https://62a4f6c30692a558d0aa0286--fancy-crisp-a8fa97.netlify.app/)
