@@ -14,7 +14,7 @@ export async function register(user) {
   return await axios.post(`${apiUrl}/register`, user);
 }
 
-export function saveToken(token) {
+function saveToken(token) {
   localStorage.setItem("token", token);
 }
 

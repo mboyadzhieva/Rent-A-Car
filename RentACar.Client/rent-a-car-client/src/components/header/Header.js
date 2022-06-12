@@ -1,67 +1,44 @@
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
-import { isUserLogged, logout } from "./../../services/auth-service";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { logout } from "./../../services/auth-service";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "./Header.scss";
 
 export function Header() {
   const navigate = useNavigate();
-  const [isAuthenticated, setAuthenticated] = useState();
 
-  useEffect(() => {
-    setInterval(() => {
-      if (isUserLogged()) {
-        setAuthenticated(true);
-      }
-    }, []);
-  }, 5000);
-
-  const showAppropriateLinks = () => {
-    if (isAuthenticated) {
-      return (
-        <>
+  return (
+    <Navbar bg="dark" variant="dark" expand="lg" className="header">
+      <Container>
+        <Navbar.Brand to="#home">Rent A Car</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Link className="nav-link" to="/users">
+              Users
+            </Link>
+            <Link className="nav-link" to="/cars">
+              Cars
+            </Link>
+            <Link className="nav-link" to="/car/add">
+              Add car
+            </Link>
+            <Link className="nav-link" to="/car-rentals">
+              My rentals
+            </Link>
+          </Nav>
           <Button
             className="nav-link logout"
             onClick={() => {
               logout();
-              setAuthenticated(false);
               navigate("/login");
             }}
           >
             Logout
           </Button>
-        </>
-      );
-    } else {
-      return (
-        <>
-          <a className="nav-link" href="/login">
-            Login
-          </a>
-          <a className="nav-link" href="/register">
-            Register
-          </a>
-        </>
-      );
-    }
-  };
-
-  return (
-    <Navbar bg="dark" variant="dark" className="header">
-      <Container>
-        <Navbar.Brand href="#home">Rent A Car</Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/users">Users</Nav.Link>
-          <Nav.Link href="/cars">Cars</Nav.Link>
-          <Nav.Link href="/car/add">Add car</Nav.Link>
-          <Nav.Link href="/car-rentals">My rentals</Nav.Link>
-        </Nav>
-        {showAppropriateLinks()}
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

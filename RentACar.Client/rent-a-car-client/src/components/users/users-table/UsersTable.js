@@ -26,7 +26,7 @@ export function UsersTable() {
   };
 
   return (
-    <Table striped bordered hover size="sm">
+    <Table striped bordered hover size="sm" className="user-info-wrapper">
       <thead>
         <tr>
           <th>Full Name</th>

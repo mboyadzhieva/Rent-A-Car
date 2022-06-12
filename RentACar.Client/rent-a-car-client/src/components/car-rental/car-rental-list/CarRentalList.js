@@ -1,25 +1,25 @@
+import Accordion from "react-bootstrap/Accordion";
 import { useEffect, useState } from "react";
 import { getAllCarRentals } from "../../../services/rent-a-car-service";
 import { CarRentalDetails } from "../car-rental-details/CarRentalDetails";
-import Accordion from "react-bootstrap/Accordion";
+import "./CarRentalsList.scss";
 
 export function CarRentalList() {
   const [carRentals, setCarRentals] = useState([]);
-  const [error, setError] = useState();
 
   useEffect(() => {
     getAllCarRentals()
       .then((response) => {
         setCarRentals(response.data);
       })
-      .catch((error) => setError(error));
+      .catch((error) => console.log(error));
   }, []);
 
   return (
-    <Accordion>
-      {error && <span className="text-danger">{error}</span>}
+    <Accordion className="my-rentals-wrapper">
+      <h3 className="my-rentals-title">My rentals:</h3>
       {carRentals.map((carRental) => (
-        <CarRentalDetails key={carRental.Id} carRental={carRental} />
+        <CarRentalDetails key={carRental.id} carRental={carRental} />
       ))}
     </Accordion>
   );

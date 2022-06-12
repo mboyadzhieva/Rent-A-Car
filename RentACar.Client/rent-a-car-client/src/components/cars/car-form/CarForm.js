@@ -10,6 +10,8 @@ export function CarForm() {
   const navigate = useNavigate();
   const params = useParams();
 
+  const [error, setError] = useState();
+
   const [car, setCar] = useState({
     brand: "",
     model: "",
@@ -28,7 +30,7 @@ export function CarForm() {
         .then((response) => {
           setCar(response.data);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => setError(error));
     }
   }, [params.id]);
 
@@ -56,6 +58,7 @@ export function CarForm() {
         <h1 className="car-form-title">
           {car.id ? "Edit Car Info" : "Create Car"}
         </h1>
+        {error && <span className="text-danger">{error}</span>}
         <Form.Group className="mb-3">
           <Form.Label>Brand</Form.Label>
           <Form.Control

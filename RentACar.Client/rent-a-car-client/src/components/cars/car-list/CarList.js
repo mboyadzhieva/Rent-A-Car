@@ -25,10 +25,10 @@ export function CarList() {
   };
 
   return (
-    <>
+    <section className="car-list-wrapper">
       {cars.map((car) => (
         <CarCard key={car.id} car={car} onCarDelete={onDeleteHandler} />
       ))}
-    </>
+    </section>
   );
 }

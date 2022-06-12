@@ -1,5 +1,5 @@
-import Nav from "react-bootstrap/Nav";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 import "./UserRow.scss";
 
 export function UserRow({ user, onUserDelete }) {
@@ -19,15 +19,15 @@ export function UserRow({ user, onUserDelete }) {
         <img src={user.pictureUrl} alt="Profile avatar of current user." />
       </td>
       <td>
-        <Nav.Link className="nav-link user-actions" onClick={redirectToEdit}>
+        <Button className="user-actions btn-warning" onClick={redirectToEdit}>
           Edit
-        </Nav.Link>
-        <Nav.Link
-          className="nav-link user-actions"
+        </Button>
+        <Button
+          className="user-actions btn-danger"
           onClick={() => onUserDelete(user.id)}
         >
           Delete
-        </Nav.Link>
+        </Button>
       </td>
     </tr>
   );

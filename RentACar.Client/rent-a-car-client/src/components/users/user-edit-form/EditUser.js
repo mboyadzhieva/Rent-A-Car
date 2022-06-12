@@ -4,11 +4,13 @@ import Col from "react-bootstrap/Col";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUserById, updateUser } from "../../../services/users-service";
+import "./EditUser.scss";
 
 export function EditUser() {
   const navigate = useNavigate();
-
   const params = useParams();
+
+  const [error, setError] = useState();
 
   const [user, setUser] = useState({
     fullName: "",
@@ -24,7 +26,7 @@ export function EditUser() {
         .then((response) => {
           setUser(response.data);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => setError(error));
     }
   }, [params.id]);
 
@@ -45,8 +47,9 @@ export function EditUser() {
 
   return (
     <Col className="bg">
-      <Form className="form-wrapper shadow-lg p-3 mb-5 bg-white rounded">
-        <h1 className="form-title">Edit user info</h1>
+      <Form className="user-form-wrapper shadow-lg p-3 mb-5 bg-white rounded">
+        <h1 className="user-form-title">Edit user info</h1>
+        {error && <span className="text-danger">{error}</span>}
         <Form.Group className="mb-3">
           <Form.Label>Full Name</Form.Label>
           <Form.Control

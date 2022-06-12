@@ -12,8 +12,9 @@ export function CarRentalDetails({ carRental }) {
 
     return [day, month, year].join(".");
   };
+
   return (
-    <Accordion.Item eventKey={carRental.key}>
+    <Accordion.Item eventKey={carRental.id}>
       <Accordion.Header>
         {carRental.constructionYear} {carRental.brand} {carRental.model}
       </Accordion.Header>

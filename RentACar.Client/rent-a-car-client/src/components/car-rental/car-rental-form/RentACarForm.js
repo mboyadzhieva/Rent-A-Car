@@ -1,6 +1,5 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
 import Modal from "react-bootstrap/Modal";
 import { useParams, useNavigate } from "react-router-dom";
 import { rentACar } from "../../../services/rent-a-car-service";
@@ -57,7 +56,7 @@ export function RentACarForm() {
   };
 
   return (
-    <Col>
+    <>
       <Form className="rent-a-car-form shadow-lg p-3 mb-5 bg-white rounded">
         <h3 className="rent-a-car-form-title">
           Choose start and end dates of your rental:
@@ -124,6 +123,6 @@ export function RentACarForm() {
           </Button>
         </Modal.Footer>
       </Modal>
-    </Col>
+    </>
   );
 }
