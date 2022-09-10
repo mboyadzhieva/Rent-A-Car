@@ -24,6 +24,7 @@ namespace RentACar.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .AddCors()
                 .AddDatabase(this.Configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetAppSettings(this.Configuration))
@@ -56,23 +57,6 @@ namespace RentACar.Server
                     endpoints.MapControllers();
                 })
                 .ApplyMigrations();
-        }
-
-        private async Task CreateRoles(IServiceProvider serviceProvider)
-        {
-            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var UserManager = serviceProvider.GetRequiredService<UserManager<User>>();
-
-            IdentityResult adminRoleResult;
-            bool adminRoleExists = await RoleManager.RoleExistsAsync("Admin");
-
-            if (!adminRoleExists)
-            {
-                adminRoleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
-            }
-
-            User userToMakeAdmin = await UserManager.FindByNameAsync("mb.admin");
-            await UserManager.AddToRoleAsync(userToMakeAdmin, "Admin");
         }
     }
 }
