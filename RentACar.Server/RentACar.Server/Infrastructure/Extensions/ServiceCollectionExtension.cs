@@ -3,6 +3,7 @@
     using AutoMapper;
     using Data;
     using Data.Models;
+    using Features.CaRental;
     using Features.Cars;
     using Features.Identity;
     using Features.Users;
@@ -13,8 +14,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.IdentityModel.Tokens;
     using Microsoft.OpenApi.Models;
-    using RentACar.Server.Features.CaRental;
-    using RentACar.Server.Infrastructure.Services;
+    using Services;
     using System.Text;
 
     public static class ServiceCollectionExtension
@@ -33,8 +33,8 @@
             this IServiceCollection services,
             IConfiguration configuration)
             => services.AddDbContext<RentACarDbContext>(options => options
-                        .UseSqlServer(configuration
-                            .GetConnectionString("DefaultConnection")));
+                        .UseNpgsql(configuration
+                            .GetConnectionString("WebApiDatabase")));
 
         public static IServiceCollection AddIdentity(this IServiceCollection services)
         {
@@ -115,6 +115,5 @@
 
             return sevices;
         }
-
     }
 }
