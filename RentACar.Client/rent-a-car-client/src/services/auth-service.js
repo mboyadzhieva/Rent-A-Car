@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "https://rentacarserver.azurewebsites.net/identity";
+const apiUrl = "https://rent-a-car-backend-server.herokuapp.com/identity";
 
 export async function login(user) {
   return await axios.post(`${apiUrl}/login`, user).then((response) => {

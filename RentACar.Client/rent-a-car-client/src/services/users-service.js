@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "https://rentacarserver.azurewebsites.net/users";
+const apiUrl = "https://rent-a-car-backend-server.herokuapp.com/users";
 
 export async function getAllUsers() {
   const users = await axios.get(apiUrl);

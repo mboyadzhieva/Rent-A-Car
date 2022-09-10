@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "https://rentacarserver.azurewebsites.net/cars";
+const apiUrl = "https://rent-a-car-backend-server.herokuapp.com/cars";
 
 export async function getAllCars() {
   return await axios.get(apiUrl);
