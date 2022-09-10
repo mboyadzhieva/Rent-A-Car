@@ -41,8 +41,11 @@
                 {
                     await userManager.AddToRoleAsync(user, "Admin");
                 }
+                else
+                {
+                    await userManager.AddToRoleAsync(user, "User");
+                }
 
-                await userManager.AddToRoleAsync(user, "User");
                 return Ok();
             }
 
