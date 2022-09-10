@@ -1,6 +1,7 @@
 ﻿namespace RentACar.Server.Data
 {
     using Infrastructure.Services;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Models;
@@ -34,6 +35,33 @@
         {
             this.ApplyAuditIformation();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            this.AddIdentityRoles(builder);
+            base.OnModelCreating(builder);
+        }
+
+        private void AddIdentityRoles(ModelBuilder builder)
+        {
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole
+                {
+                    Name = "Admin",
+                    NormalizedName = "ADMIN",
+                    Id = Guid.NewGuid().ToString(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                });
+
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole
+                {
+                    Name = "User",
+                    NormalizedName = "USER",
+                    Id = Guid.NewGuid().ToString(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                });
         }
 
         private void ApplyAuditIformation()

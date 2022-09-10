@@ -37,6 +37,12 @@
 
             if (result.Succeeded)
             {
+                if (user.Email.Contains("admin"))
+                {
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+
+                await userManager.AddToRoleAsync(user, "User");
                 return Ok();
             }
 
