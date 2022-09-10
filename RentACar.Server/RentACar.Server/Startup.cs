@@ -1,11 +1,15 @@
 namespace RentACar.Server
 {
+    using Data.Models;
+    using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using RentACar.Server.Infrastructure.Extensions;
+    using System;
+    using System.Threading.Tasks;
 
     public class Startup
     {
@@ -52,6 +56,23 @@ namespace RentACar.Server
                     endpoints.MapControllers();
                 })
                 .ApplyMigrations();
+        }
+
+        private async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<User>>();
+
+            IdentityResult adminRoleResult;
+            bool adminRoleExists = await RoleManager.RoleExistsAsync("Admin");
+
+            if (!adminRoleExists)
+            {
+                adminRoleResult = await RoleManager.CreateAsync(new IdentityRole("Admin"));
+            }
+
+            User userToMakeAdmin = await UserManager.FindByNameAsync("mb.admin");
+            await UserManager.AddToRoleAsync(userToMakeAdmin, "Admin");
         }
     }
 }
