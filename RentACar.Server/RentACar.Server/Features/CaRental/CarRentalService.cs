@@ -1,4 +1,7 @@
-﻿namespace RentACar.Server.Features.CaRental
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("RentACar.Server.Tests")]
+namespace RentACar.Server.Features.CaRental
 {
     using AutoMapper;
     using Data;
@@ -69,12 +72,13 @@
         {
             string userId = this.currentUser.GetUserId();
 
-            return await (from cr in dbContext.CarRentals
-                          from c in dbContext.Cars
-                         where cr.CarId == c.Id && cr.UserId == userId
-                        select new CarRentalDetailsResponseModel
+            return await this.dbContext.CarRentals
+                .Where(cr => cr.UserId == userId)
+                .Join(this.dbContext.Cars,
+                        cr => cr.CarId,
+                        c => c.Id, 
+                        (cr, c) => new CarRentalDetailsResponseModel
                         {
-                            Id = cr.Id,
                             Brand = c.Brand,
                             Model = c.Model,
                             ConstructionYear = c.ConstructionYear,
@@ -83,7 +87,7 @@
                             StartDate = cr.StartDate,
                             EndDate = cr.EndDate
                         })
-                        .ToListAsync();
+                .ToListAsync();
         }
 
         //public async Task<CarRentalDetailsResponseModel> Get(int id)
@@ -120,7 +124,8 @@
             return totalPrice;
         }
 
-        private bool IsUserVIP(string userId)
+        // Internal for testing purposes.
+        internal bool IsUserVIP(string userId)
         {
             var userCarRentals = this.dbContext
                 .CarRentals
