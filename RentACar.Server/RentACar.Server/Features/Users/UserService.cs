@@ -1,10 +1,12 @@
 ﻿namespace RentACar.Server.Features.Users
 {
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Data;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using RentACar.Server.Data.Models;
+    using RentACar.Server.Infrastructure.Services;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -13,23 +15,32 @@
     {
         private readonly RentACarDbContext dbContext;
         private readonly UserManager<User> userManager;
+        private readonly ICurrentUserService currentUser;
         private readonly IMapper mapper;
 
-        public UserService(RentACarDbContext data, IMapper mapper, UserManager<User> userManager)
+        public UserService(RentACarDbContext data, IMapper mapper, UserManager<User> userManager,
+            ICurrentUserService currentUser)
         {
             this.dbContext = data;
             this.mapper = mapper;
+            this.currentUser = currentUser;
             this.userManager = userManager;
         }
 
         public async Task<IEnumerable<UserModel>> GetAll()
         {
-            return await this.dbContext
+            var configuration = new MapperConfiguration(cfg => cfg.CreateProjection<User, UserModel>());
+
+            var result = await this.dbContext
                 .Users
-                .OrderBy(u => u.FullName)
                 .Where(u => u.IsDeleted == false)
-                .Select(u => mapper.Map<UserModel>(u))
+                .OrderBy(u => u.FullName)
+                .ProjectTo<UserModel>(configuration)
                 .ToListAsync();
+
+            System.Console.WriteLine($"Tracked entities in UserService.GetAll(): {dbContext.ChangeTracker.Entries().Count()}");
+
+            return result;
         }
 
         public async Task<UserModel> Get(string id)
@@ -37,6 +48,18 @@
             var user = await userManager.FindByIdAsync(id);
 
             return mapper.Map<UserModel>(user);
+        }
+
+        public async Task<UserModel> GetCurrentUser()
+        {
+            var userId = this.currentUser.GetUserId(); 
+            var user = await userManager.FindByIdAsync(userId);
+            var isAdmin = await userManager.IsInRoleAsync(user, "Admin");
+
+            var userModel = mapper.Map<UserModel>(user);
+            userModel.IsAdmin = isAdmin;
+
+            return userModel;
         }
 
         public async Task<bool> Update(UserModel model)

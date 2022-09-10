@@ -1,9 +1,11 @@
 ﻿namespace RentACar.Server.Features.Cars
 {
     using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using Data;
     using Data.Models;
     using Microsoft.EntityFrameworkCore;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -21,11 +23,17 @@
 
         public async Task<IEnumerable<CarModel>> GetAll()
         {
-            return await this.dbContext
+            var configuration = new MapperConfiguration(cfg => cfg.CreateProjection<Car, CarModel>());
+
+            var result = await this.dbContext
                 .Cars
                 .Where(c => c.IsDeleted == false)
-                .Select(c => mapper.Map<CarModel>(c))
+                .ProjectTo<CarModel>(configuration)
                 .ToListAsync();
+
+            Console.WriteLine($"Tracked entities in CarService.GetAll(): {dbContext.ChangeTracker.Entries().Count()}");
+
+            return result;
         }
 
         public async Task<CarModel> Get(int id)
@@ -49,32 +57,29 @@
         {
             var car = await this.dbContext.Cars.FindAsync(model.Id);
 
-            if (car != null)
+            if (car == null)
             {
-                mapper.Map(model, car);
-                await this.dbContext.SaveChangesAsync();
-
-                return true;
+                return false;
             }
 
-            return false;
+            mapper.Map(model, car);
+            await this.dbContext.SaveChangesAsync();
+
+            return true;
         }
 
         public async Task<bool> Delete(int carId)
         {
-            var car = await this.dbContext
-                .Cars
-                .Where(x => x.Id == carId)
-                .FirstOrDefaultAsync();
+            var car = new Car { Id = carId };
 
-            if (car != null)
+            try
             {
                 this.dbContext.Remove(car);
                 await this.dbContext.SaveChangesAsync();
 
                 return true;
             }
-            else
+            catch
             {
                 return false;
             }

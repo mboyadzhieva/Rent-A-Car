@@ -16,9 +16,9 @@
         private readonly IMapper mapper;
 
         public IdentityController(
-            UserManager<User> userManager, 
-            IOptions<AppSettings> appSettings, 
-            IIdentityService identityService, 
+            UserManager<User> userManager,
+            IOptions<AppSettings> appSettings,
+            IIdentityService identityService,
             IMapper mapper)
         {
             this.userManager = userManager;
@@ -70,10 +70,8 @@
                 return Unauthorized();
             }
 
-            var encryptedToken = identityService.GenerateJwtToken(
-                user.Id, 
-                user.UserName,
-                user.Email, 
+            var encryptedToken = await identityService.GenerateJwtToken(
+                user,
                 this.appSettings.Secret);
 
             return new LoginResponseModel

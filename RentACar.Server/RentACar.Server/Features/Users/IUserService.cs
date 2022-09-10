@@ -7,10 +7,12 @@
     {
         Task<IEnumerable<UserModel>> GetAll();
 
-        Task<bool> Delete(string id);
-
         Task<UserModel> Get(string id);
 
+        Task<UserModel> GetCurrentUser();
+
         Task<bool> Update(UserModel model);
+
+        Task<bool> Delete(string id);
     }
 }

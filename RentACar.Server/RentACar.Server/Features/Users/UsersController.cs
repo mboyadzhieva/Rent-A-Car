@@ -1,9 +1,9 @@
 ﻿namespace RentACar.Server.Features.Users
 {
+    using Data.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using RentACar.Server.Data.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -11,12 +11,10 @@
     public class UsersController : ApiController
     {
         private readonly IUserService users;
-        private readonly UserManager<User> userManager;
 
-        public UsersController(IUserService users, UserManager<User> userManager)
+        public UsersController(IUserService users)
         {
             this.users = users;
-            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -25,14 +23,22 @@
             return await this.users.GetAll();
         }
 
+        [HttpGet("currentUser")]
+        public async Task<UserModel> GetCurrentUser()
+        {
+            return await this.users.GetCurrentUser();
+        }
+
         [HttpGet]
         [Route("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<UserModel> GetUserById(string id)
         {
             return await users.Get(id);
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<bool> EditUser(UserModel model)
         {
             return await this.users.Update(model);
@@ -40,6 +46,7 @@
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteUser(string id)
         {
             var deleted = await this.users.Delete(id);

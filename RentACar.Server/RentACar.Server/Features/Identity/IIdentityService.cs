@@ -1,7 +1,10 @@
 ﻿namespace RentACar.Server.Features.Identity
 {
+    using Data.Models;
+    using System.Threading.Tasks;
+
     public interface IIdentityService
     {
-        string GenerateJwtToken(string userId, string userName, string email, string secret);
+        Task<string> GenerateJwtToken(User user, string secret);
     }
 }
