@@ -1,10 +1,11 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCarById, saveCar } from "./../../../services/car-service";
 import { Col } from "react-bootstrap";
 import "./CarForm.scss";
+import { useEffectOnce } from "../../UseEffectWorkaround";
 
 export function CarForm() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export function CarForm() {
     count: "",
   });
 
-  useEffect(() => {
+  useEffectOnce(() => {
     if (params.id) {
       getCarById(params.id)
         .then((response) => {

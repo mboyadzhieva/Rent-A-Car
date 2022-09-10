@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { deleteUser, getAllUsers } from "../../../services/users-service";
 import { UserRow } from "../user-row/UserRow";
+import { useEffectOnce } from "../../UseEffectWorkaround";
 import Table from "react-bootstrap/Table";
 import "./UsersTable.scss";
 
 export function UsersTable() {
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
+  useEffectOnce(() => {
     getAllUsers()
       .then((response) => {
         setUsers(response.data);
