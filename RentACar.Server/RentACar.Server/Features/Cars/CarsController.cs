@@ -29,6 +29,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<int>> Create(CarModel model)
         {
             var id = await this.cars.Create(model);
@@ -37,6 +38,7 @@
         }
 
         [HttpPut]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult> Update(CarModel model)
         {
             var updated = await this.cars.Update(model);
@@ -51,6 +53,7 @@
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult> Delete(int id)
         {
             var deleted = await this.cars.Delete(id);
