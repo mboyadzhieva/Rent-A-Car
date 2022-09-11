@@ -25,7 +25,7 @@ namespace RentACar.Server
                     options.AddPolicy("FEPolicy",
                         policy =>
                         {
-                            policy.WithOrigins("https://631de006a2daed0008de8512--fancy-crisp-a8fa97.netlify.app/",
+                            policy.WithOrigins("https://fancy-crisp-a8fa97.netlify.app",
                                                 "http://localhost:3000")
                                                 .AllowAnyHeader()
                                                 .AllowAnyMethod();
