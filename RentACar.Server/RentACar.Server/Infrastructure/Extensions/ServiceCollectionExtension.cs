@@ -151,6 +151,7 @@
                     options.AddPolicy(name: policyName,
                         policy => policy
                             .AllowAnyOrigin()
+                            .AllowAnyMethod()
                             .AllowAnyHeader());
 
                 });
