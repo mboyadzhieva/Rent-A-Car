@@ -43,9 +43,10 @@ namespace RentACar.Server
                 .UseSwaggerUI()
                 .UseRouting()
                 .UseCors(options => options
-                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
                     .AllowAnyHeader()
-                    .AllowAnyMethod())
+                    .SetIsOriginAllowed(origin => true)
+                    .AllowCredentials())
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
