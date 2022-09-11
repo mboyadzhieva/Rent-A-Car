@@ -20,7 +20,17 @@ namespace RentACar.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddCors()
+                .AddCors(options =>
+                {
+                    options.AddPolicy("FEPolicy",
+                        policy =>
+                        {
+                            policy.WithOrigins("https://631de006a2daed0008de8512--fancy-crisp-a8fa97.netlify.app/",
+                                                "http://localhost:3000")
+                                                .AllowAnyHeader()
+                                                .AllowAnyMethod();
+                        });
+                })
                 .AddDatabase(this.Configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetAppSettings(this.Configuration))
@@ -42,11 +52,7 @@ namespace RentACar.Server
             app
                 .UseSwaggerUI()
                 .UseRouting()
-                .UseCors(options => options
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .SetIsOriginAllowed(origin => true)
-                    .AllowCredentials())
+                .UseCors()
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>
