@@ -9,6 +9,8 @@ namespace RentACar.Server
 
     public class Startup
     {
+        private readonly string policyName = "FEPolicy";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -20,17 +22,7 @@ namespace RentACar.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddCors(options =>
-                {
-                    options.AddPolicy("FEPolicy",
-                        policy =>
-                        {
-                            policy.WithOrigins("https://fancy-crisp-a8fa97.netlify.app",
-                                                "http://localhost:3000")
-                                                .AllowAnyHeader()
-                                                .AllowAnyMethod();
-                        });
-                })
+                .AddCustomCorsPolicy(policyName)
                 .AddDatabase(this.Configuration)
                 .AddIdentity()
                 .AddJwtAuthentication(services.GetAppSettings(this.Configuration))
@@ -52,7 +44,7 @@ namespace RentACar.Server
             app
                 .UseSwaggerUI()
                 .UseRouting()
-                .UseCors()
+                .UseCors(policyName)
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseEndpoints(endpoints =>

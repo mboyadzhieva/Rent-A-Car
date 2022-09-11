@@ -32,9 +32,9 @@
 
         public static IServiceCollection AddDatabase(
             this IServiceCollection services,
-            IConfiguration configuration) 
+            IConfiguration configuration)
         {
-            var isDevelopment = 
+            var isDevelopment =
                 Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
 
             if (isDevelopment)
@@ -142,5 +142,17 @@
 
             return sevices;
         }
+
+        public static IServiceCollection AddCustomCorsPolicy(this IServiceCollection services, string policyName)
+        =>
+            services
+                .AddCors(options =>
+                {
+                    options.AddPolicy(name: policyName,
+                        policy => policy
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader());
+
+                });
     }
 }
