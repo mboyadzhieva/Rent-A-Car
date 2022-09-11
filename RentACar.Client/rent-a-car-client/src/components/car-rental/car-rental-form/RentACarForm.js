@@ -32,14 +32,14 @@ export function RentACarForm() {
 
     rentACar(carRentalRequestInfo)
       .then((response) => {
-        if(!response.data){
+        if (!response.data) {
           setError("Both dates have to be future dates!");
           return;
-        }        
+        }
         setCarRentalResponseInfo(response.data);
-        setShow(true);        
+        setShow(true);
       })
-      .catch((error) => setError(error));
+      .catch((error) => console.log(error));
   };
 
   const handleBackToCars = () => {

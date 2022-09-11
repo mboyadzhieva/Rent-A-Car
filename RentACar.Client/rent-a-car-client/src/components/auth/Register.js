@@ -34,7 +34,7 @@ export function Register() {
       .then(() => {
         navigate("/login");
       })
-      .catch((error) => setError(error));
+      .catch((error) => console.log(error));
   };
 
   return (

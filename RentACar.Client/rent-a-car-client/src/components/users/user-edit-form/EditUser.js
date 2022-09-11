@@ -49,7 +49,7 @@ export function EditUser() {
     <Col className="bg">
       <Form className="user-form-wrapper shadow-lg p-3 mb-5 bg-white rounded">
         <h1 className="user-form-title">Edit user info</h1>
-        {error && <span className="text-danger">{error}</span>}
+        {error && <span className="text-danger">{{ error }}</span>}
         <Form.Group className="mb-3">
           <Form.Label>Full Name</Form.Label>
           <Form.Control

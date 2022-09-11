@@ -43,6 +43,7 @@ function App() {
             </AuthGuard>
           }
         >
+          <Route path="/" element={<CarList />} />
           <Route path="/cars" element={<CarList />} />
           <Route path="/car/add" element={<CarForm />} />
           <Route path="/car/edit/:id" element={<CarForm />} />

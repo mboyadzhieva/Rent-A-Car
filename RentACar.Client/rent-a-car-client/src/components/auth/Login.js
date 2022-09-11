@@ -34,6 +34,10 @@ export function Login() {
     });
   };
 
+  const onRegisterBtnClick = () => {
+    navigate("/register");
+  };
+
   return (
     <Form className="auth-form-wrapper shadow-lg p-3 mb-5 bg-white rounded">
       <h1 className="auth-form-title">Login</h1>
@@ -61,7 +65,14 @@ export function Login() {
       </Form.Group>
 
       <Button variant="primary" type="submit" onClick={onFormSubmit}>
-        Submit
+        Login
+      </Button>
+      <Button
+        className="btnRegister"
+        variant="primary"
+        onClick={onRegisterBtnClick}
+      >
+        SignUp
       </Button>
     </Form>
   );

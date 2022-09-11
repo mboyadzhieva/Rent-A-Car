@@ -1,10 +1,23 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CarCard.scss";
+import { useEffectOnce } from "../../UseEffectWorkaround";
+import { getCurrentUser } from "../../../services/users-service";
 
 export function CarCard({ car, onCarDelete }) {
   const navigate = useNavigate();
+  const [user, setUser] = useState();
+
+  useEffectOnce(() => {
+    getCurrentUser()
+      .then((response) => {
+        console.log(response.data);
+        setUser(response.data);
+      })
+      .catch((error) => console.log(error));
+  });
 
   const navigateToEdit = () => {
     navigate(`/car/edit/${car.id}`);
@@ -57,6 +70,7 @@ export function CarCard({ car, onCarDelete }) {
           className="car-action-btn"
           variant="warning"
           onClick={navigateToEdit}
+          disabled={!user?.isAdmin}
         >
           Edit
         </Button>
@@ -64,6 +78,7 @@ export function CarCard({ car, onCarDelete }) {
           className="car-action-btn"
           variant="danger"
           onClick={() => onCarDelete(car.id)}
+          disabled={!user?.isAdmin}
         >
           Delete
         </Button>

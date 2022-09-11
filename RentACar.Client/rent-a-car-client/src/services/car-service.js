@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const apiUrl = "https://rent-a-car-backend-server.herokuapp.com/cars";
+//const apiUrl = "https://localhost:5001/cars";
 
 export async function getAllCars() {
   return await axios.get(apiUrl);

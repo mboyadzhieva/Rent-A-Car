@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const apiUrl = "https://rent-a-car-backend-server.herokuapp.com/users";
+//const apiUrl = "https://localhost:5001/users";
 
 export async function getAllUsers() {
   const users = await axios.get(apiUrl);
@@ -9,6 +10,10 @@ export async function getAllUsers() {
 
 export async function getUserById(userId) {
   return await axios.get(`${apiUrl}/${userId}`);
+}
+
+export async function getCurrentUser() {
+  return await axios.get(`${apiUrl}/currentUser`);
 }
 
 export async function updateUser(user) {

@@ -1,9 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import "./UserRow.scss";
+import { useState } from "react";
+import { useEffectOnce } from "../../UseEffectWorkaround";
+import { getCurrentUser } from "../../../services/users-service";
 
 export function UserRow({ user, onUserDelete }) {
   const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState();
+
+  useEffectOnce(() => {
+    getCurrentUser()
+      .then((response) => {
+        setCurrentUser(response.data);
+      })
+      .catch((error) => console.log(error));
+  });
 
   const redirectToEdit = () => {
     navigate(`/user/edit/${user.id}`);
@@ -19,12 +31,17 @@ export function UserRow({ user, onUserDelete }) {
         <img src={user.pictureUrl} alt="Profile avatar of current user." />
       </td>
       <td>
-        <Button className="user-actions btn-warning" onClick={redirectToEdit}>
+        <Button
+          className="user-actions btn-warning"
+          onClick={redirectToEdit}
+          disabled={!currentUser?.isAdmin}
+        >
           Edit
         </Button>
         <Button
           className="user-actions btn-danger"
           onClick={() => onUserDelete(user.id)}
+          disabled={!currentUser?.isAdmin}
         >
           Delete
         </Button>
