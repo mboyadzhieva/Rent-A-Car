@@ -37,13 +37,18 @@
             var isDevelopment = 
                 Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
 
-            var connectionString = 
-                isDevelopment 
-                ? configuration.GetConnectionString("DefaultConnection") 
-                : GetHerokuConnectionString();
+            if (isDevelopment)
+            {
+                services.AddDbContext<RentACarDbContext>(options => options
+                        .UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            }
+            else
+            {
+                services.AddDbContext<RentACarDbContext>(options => options
+                        .UseNpgsql(GetHerokuConnectionString()));
+            }
 
-            return services.AddDbContext<RentACarDbContext>(options => options
-                        .UseNpgsql(connectionString));
+            return services;
         }
 
         private static string GetHerokuConnectionString()
