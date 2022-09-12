@@ -15,14 +15,14 @@ Web application, allowing users to browse through a collection of available cars
 - Only registered users can access the application.
 
 ## Ways to run/check out the application:
+Login credentials: ***email: test@user.com & password: test***
 ### 1. Access the app directly [Rent A Car UI](https://fancy-crisp-a8fa97.netlify.app/) (Rental confirmation is temporarily unavailable)
 ### 2. Download the source code as a zip or clone it:  
-    - Run `npm install` while in the __rent-a-car-client/__ folder to get all of the needed node modules
-    - Then run `npm start` to start the application
-    - When the login screen loads, you can either:
-       * Login with credentials: 
-           * **email: test@user.com & password: test** or
-       * Create your own user via the Sign Up button
+- Run `npm install` while in the __rent-a-car-client/__ folder to get all of the needed node modules
+- Then run `npm start` to start the application
+  - When the login screen loads, you can either:
+    - Login with the given credentials or
+    - Create your own user via the Sign Up button
 ### 3. Rent A Car Guide:
 
 - Login page  
