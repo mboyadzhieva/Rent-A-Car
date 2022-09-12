@@ -150,10 +150,10 @@
                 {
                     options.AddPolicy(name: policyName,
                         policy => policy
-                            .AllowAnyOrigin()
                             .AllowAnyMethod()
-                            .AllowAnyHeader());
-
+                            .AllowAnyHeader()
+                            .SetIsOriginAllowed(origin => true)
+                            .AllowCredentials());
                 });
     }
 }
