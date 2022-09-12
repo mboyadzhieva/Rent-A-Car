@@ -1,9 +1,9 @@
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import { useParams, useNavigate } from "react-router-dom";
-import { rentACar } from "../../../services/rent-a-car-service";
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Modal from "react-bootstrap/Modal";
+import { useNavigate, useParams } from "react-router-dom";
+import { rentACar } from "../../../services/rent-a-car-service";
 import "./RentACarForm.scss";
 
 export function RentACarForm() {
@@ -39,7 +39,7 @@ export function RentACarForm() {
         setCarRentalResponseInfo(response.data);
         setShow(true);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setError(error.message));
   };
 
   const handleBackToCars = () => {

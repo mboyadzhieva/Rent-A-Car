@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import "./UserRow.scss";
 import { useState } from "react";
-import { useEffectOnce } from "../../UseEffectWorkaround";
+import Button from "react-bootstrap/Button";
+import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../../services/users-service";
+import { useEffectOnce } from "../../UseEffectWorkaround";
+import "./UserRow.scss";
 
 export function UserRow({ user, onUserDelete }) {
   const navigate = useNavigate();

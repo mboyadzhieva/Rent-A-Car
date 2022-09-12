@@ -1,8 +1,8 @@
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { login } from "../../services/auth-service";
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../services/auth-service";
 import "./Auth.scss";
 
 export function Login() {
@@ -72,7 +72,7 @@ export function Login() {
         variant="primary"
         onClick={onRegisterBtnClick}
       >
-        SignUp
+        Sign Up
       </Button>
     </Form>
   );

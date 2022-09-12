@@ -1,8 +1,8 @@
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import { register } from "../../services/auth-service";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import { register } from "../../services/auth-service";
 import "./Auth.scss";
 
 export function Register() {
@@ -34,7 +34,11 @@ export function Register() {
       .then(() => {
         navigate("/login");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setError(error.message));
+  };
+
+  const onLoginBtnClick = () => {
+    navigate("/login");
   };
 
   return (
@@ -103,6 +107,9 @@ export function Register() {
 
       <Button variant="primary" type="submit" onClick={onFormSubmit}>
         Register
+      </Button>
+      <Button className="btnLogin" variant="primary" onClick={onLoginBtnClick}>
+        Sign In
       </Button>
     </Form>
   );

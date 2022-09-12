@@ -1,7 +1,7 @@
-import { Header } from "./../header/Header";
-import { Footer } from "./../footer/Footer";
-import { Main } from "./../main/Main";
 import { Container, Row } from "react-bootstrap";
+import { Footer } from "./../footer/Footer";
+import { Header } from "./../header/Header";
+import { Main } from "./../main/Main";
 
 export function Layout() {
   return (

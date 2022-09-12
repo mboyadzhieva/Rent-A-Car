@@ -1,5 +1,5 @@
-import Accordion from "react-bootstrap/Accordion";
 import { useEffect, useState } from "react";
+import Accordion from "react-bootstrap/Accordion";
 import { getAllCarRentals } from "../../../services/rent-a-car-service";
 import { CarRentalDetails } from "../car-rental-details/CarRentalDetails";
 import "./CarRentalsList.scss";

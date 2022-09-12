@@ -1,11 +1,11 @@
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { getCarById, saveCar } from "./../../../services/car-service";
 import { Col } from "react-bootstrap";
-import "./CarForm.scss";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffectOnce } from "../../UseEffectWorkaround";
+import { getCarById, saveCar } from "./../../../services/car-service";
+import "./CarForm.scss";
 
 export function CarForm() {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export function CarForm() {
         .then((response) => {
           setCar(response.data);
         })
-        .catch((error) => setError(error));
+        .catch((error) => setError(error.message));
     }
   }, [params.id]);
 

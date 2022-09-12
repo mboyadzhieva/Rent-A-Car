@@ -1,7 +1,7 @@
-import Form from "react-bootstrap/Form";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
-import { useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
 import { useNavigate, useParams } from "react-router-dom";
 import { getUserById, updateUser } from "../../../services/users-service";
 import "./EditUser.scss";
@@ -26,7 +26,7 @@ export function EditUser() {
         .then((response) => {
           setUser(response.data);
         })
-        .catch((error) => setError(error));
+        .catch((error) => setError(error.message));
     }
   }, [params.id]);
 

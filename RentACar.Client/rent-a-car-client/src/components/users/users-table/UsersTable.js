@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { deleteUser, getAllUsers } from "../../../services/users-service";
-import { UserRow } from "../user-row/UserRow";
-import { useEffectOnce } from "../../UseEffectWorkaround";
 import Table from "react-bootstrap/Table";
+import { deleteUser, getAllUsers } from "../../../services/users-service";
+import { useEffectOnce } from "../../UseEffectWorkaround";
+import { UserRow } from "../user-row/UserRow";
 import "./UsersTable.scss";
 
 export function UsersTable() {

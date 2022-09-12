@@ -1,10 +1,10 @@
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
-import "./CarCard.scss";
-import { useEffectOnce } from "../../UseEffectWorkaround";
 import { getCurrentUser } from "../../../services/users-service";
+import { useEffectOnce } from "../../UseEffectWorkaround";
+import "./CarCard.scss";
 
 export function CarCard({ car, onCarDelete }) {
   const navigate = useNavigate();
@@ -13,7 +13,6 @@ export function CarCard({ car, onCarDelete }) {
   useEffectOnce(() => {
     getCurrentUser()
       .then((response) => {
-        console.log(response.data);
         setUser(response.data);
       })
       .catch((error) => console.log(error));
